@@ -35,13 +35,10 @@
     function draw() {
       background(0);
 
-      let vol = mic.getLevel() * lampCount;
-      // let vol = 0.8345 * lampCount;
-      let onLampCount = Math.floor(vol);
+      let vol = mic.getLevel() * lampCount * 0.8;
+      let onLampCount = vol > lampCount ? lampCount : Math.floor(vol);
       let fraction = vol - onLampCount;
 
-      console.log(vol);
-      console.log(onLampCount);
       var brights = Array(onLampCount).fill(highBright)
         .concat([(1 - fraction) * lowBright + fraction * highBright])
         .concat(Array(lampCount - onLampCount).fill(lowBright));
