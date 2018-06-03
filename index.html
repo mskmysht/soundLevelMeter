@@ -30,14 +30,13 @@
     let warnLamp = 0;
     let highBright = 100;
     let lowBright = 20;
-    let 
 
     function draw() {
       background(0);
 
       let vol = mic.getLevel() * lampCount;
       let onLampCount = Math.floor(vol);
-      let fraction = vol - maxLampCount;
+      let fraction = vol - onLampCount;
 
       var brights = Array(onLampCount).fill(highBright)
         .concat([fraction])
