@@ -9,8 +9,15 @@
   <body>
   <script>
     var mic;
+    let canvasWidth = 400;
+    let canvasHeight = 300;
+    let margin = 10;
+
+    let lampCount = 20;
+    let lampSize = (canvasWidth - margin * 2) / lampCount;
+
     function setup() {
-      createCanvas(400, 300);
+      createCanvas(canvasWidth, canvasHeight);
 
       noStroke();
       colorMode(HSB);
@@ -19,15 +26,30 @@
       mic.start();
     }
 
+    let safeLamp = 125;
+    let warnLamp = 0;
+    let highBright = 100;
+    let lowBright = 20;
+    let 
+
     function draw() {
       background(0);
-      fill("#FFAAAA");
-      ellipse(100, 100, 50, 50);
 
+      let vol = mic.getLevel() * lampCount;
+      let onLampCount = Math.floor(vol);
+      let fraction = vol - maxLampCount;
 
-      let vol = mic.getLevel();
-      fill(125, 100, vol*100);
-      ellipse(50, 50, 50, 50);
+      var brights = Array(onLampCount).fill(highBright)
+        .concat([fraction])
+        .concat(Array(onLampCount - lampCount).fill(lowBright));
+
+      var x = margin - (lampSize / 2);
+      brights.forEach( (v, i) -> {
+        fill((i < Math.floor(vol * 0.8) ? safeLamp : warnLamp), 100, v);
+        x = x + lampSize;
+        let y = canvasHeight / 2;
+        ellipse(x, y, lampSize, lampSize);
+      });
     }
   </script>
   </body>
