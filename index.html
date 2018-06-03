@@ -15,6 +15,12 @@
 
     let lampCount = 20;
     let lampSize = (canvasWidth - margin * 2) / lampCount;
+    let lampDrawSize = lampSize * 0.8
+
+    let safeLamp = 125;
+    let warnLamp = 0;
+    let highBright = 100;
+    let lowBright = 20;
 
     function setup() {
       createCanvas(canvasWidth, canvasHeight);
@@ -26,28 +32,24 @@
       mic.start();
     }
 
-    let safeLamp = 125;
-    let warnLamp = 0;
-    let highBright = 100;
-    let lowBright = 20;
-
     function draw() {
       background(0);
 
       let vol = mic.getLevel() * lampCount;
+      // let vol = 0.8345 * lampCount;
       let onLampCount = Math.floor(vol);
       let fraction = vol - onLampCount;
 
       var brights = Array(onLampCount).fill(highBright)
-        .concat([fraction])
-        .concat(Array(onLampCount - lampCount).fill(lowBright));
+        .concat([(1 - fraction) * lowBright + fraction * highBright])
+        .concat(Array(lampCount - onLampCount).fill(lowBright));
 
       var x = margin - (lampSize / 2);
       brights.forEach( (v, i) => {
         fill((i < Math.floor(vol * 0.8) ? safeLamp : warnLamp), 100, v);
         x = x + lampSize;
         let y = canvasHeight / 2;
-        ellipse(x, y, lampSize, lampSize);
+        ellipse(x, y, lampDrawSize, lampDrawSize);
       });
     }
   </script>
