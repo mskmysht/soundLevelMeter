@@ -10,16 +10,21 @@
   <script>
     var mic;
     function setup() {
-      mic = new p5.AudioIn();
       createCanvas(400, 300);
-      background("#000000");
-      fill("#FFAAAA");
-      ellipse(100, 100, 50, 50);
+
       noStroke();
       colorMode(HSB);
+
+      mic = new p5.AudioIn();
+      mic.Start();
     }
 
     function draw() {
+      background(0);
+      fill("#FFAAAA");
+      ellipse(100, 100, 50, 50);
+
+
       let vol = mic.getLevel();
       fill(125, 100, vol*100);
       ellipse(50, 50, 50, 50);
