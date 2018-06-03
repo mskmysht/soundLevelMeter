@@ -13,12 +13,14 @@
       mic = new p5.AudioIn();
       createCanvas(400, 300);
       background("#000000");
+      fill("#FFAAAA");
+      ellipse(100, 100, 50, 50);
       noStroke();
+      colorMode(HSB);
     }
 
     function draw() {
       let vol = mic.getLevel();
-      colorMode(HSB);
       fill(125, 100, vol*100);
       ellipse(50, 50, 50, 50);
     }
