@@ -46,7 +46,7 @@
 
       var x = margin - (lampSize / 2);
       brights.forEach( (v, i) => {
-        fill((i < Math.floor(vol * 0.8) ? safeLamp : warnLamp), 100, v);
+        fill((i < Math.floor(lampCount * 0.8) ? safeLamp : warnLamp), 100, v);
         x = x + lampSize;
         let y = canvasHeight / 2;
         ellipse(x, y, lampDrawSize, lampDrawSize);
