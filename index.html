@@ -40,6 +40,8 @@
       let onLampCount = Math.floor(vol);
       let fraction = vol - onLampCount;
 
+      console.log(vol);
+      console.log(onLampCount);
       var brights = Array(onLampCount).fill(highBright)
         .concat([(1 - fraction) * lowBright + fraction * highBright])
         .concat(Array(lampCount - onLampCount).fill(lowBright));
