@@ -10,20 +10,26 @@
   <body>
   <script>
     var mic;
-    let canvasWidth = windowWidth;
-    let canvasHeight = windowHeight;
     let margin = 10;
 
     let lampCount = 20;
-    let lampSize = (canvasWidth - margin * 2) / lampCount;
-    let lampDrawSize = lampSize * 0.8
+    let brightArea = 0.8
 
     let safeLamp = 125;
     let warnLamp = 0;
     let highBright = 100;
     let lowBright = 20;
 
+    var canvasWidth;
+    var canvasHeight;
+    var lampSize;
+
+
     function setup() {
+      canvasWidth = windowWidth;
+      canvasHeight = windowHeight;
+      lampSize = (canvasWidth - margin * 2) / lampCount;
+
       createCanvas(canvasWidth, canvasHeight);
 
       noStroke();
@@ -51,7 +57,7 @@
         fill((i < Math.floor(lampCount * 0.8) ? safeLamp : warnLamp), 100, v);
         x = x + lampSize;
         let y = canvasHeight / 2;
-        ellipse(x, y, lampDrawSize, lampDrawSize);
+        ellipse(x, y, lampSize * brightArea, lampSize * brightArea);
       });
     }
   </script>
